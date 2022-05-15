@@ -1,0 +1,25 @@
+{% extends 'main.html' %}
+
+    {% block css %}
+    
+    {% endblock %}
+
+
+    {% block title %}
+        Account Update
+    {% endblock %}
+
+    {% block content %}
+        <h1>
+            Edit Account
+        </h1>
+        <table>
+            <form method="POST" action="{% url 'edit-account' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{form.as_p}}
+            <input type="submit" value="Submit">
+            </form>
+        </table>
+        
+
+    {% endblock %}

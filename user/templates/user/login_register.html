@@ -1,0 +1,32 @@
+{% extends 'main.html' %}
+
+    {% block css %}
+    
+    {% endblock %}
+
+
+    {% block title %}
+        Login User
+    {% endblock %}
+
+    {% block content %}
+    {% if page == 'register' %}
+    <h1>Register User</h1>
+    <form method="post" action="{% url 'register' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Register" />
+    </form>
+
+    <p>Already have an account to login <a href = "{% url 'login' %}">Login</a></p>
+    {% else %}
+        <form action = {% url 'login' %} method="POST" enctype="multipart/form">
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="Username"/>
+            <input type="password" name="password" placeholder="Password"/>
+            <input type="submit" value="login"/>
+            <p>Don't have an account to login <a href = "{% url 'register' %}">Sign Up</a></p>
+    {% endif %}
+        </form>
+
+    {% endblock %}

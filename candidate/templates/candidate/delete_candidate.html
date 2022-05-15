@@ -1,0 +1,21 @@
+{% extends 'main.html' %}
+
+    {% block css %}
+    
+    {% endblock %}
+
+
+    {% block title %}
+        Delete Candidate
+    {% endblock %}
+
+    {% block content %}
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <p>Are you sure you want to delete "{{ candidate.first_name ]} Profile ?"
+                <a href="{% url 'home' %}">
+                    Go Back
+                </a>
+                <input type="submit" value="Delete">
+                    </form>
+    {% endblock %}

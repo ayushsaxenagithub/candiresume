@@ -1,0 +1,61 @@
+{% extends 'main.html' %}
+
+    {% block css %}
+    {% load static %}
+        <link href="{% static 'candidate/style/home.css' %}" rel="stylesheet" type="text/css">
+
+    {% endblock %}
+
+
+    {% block title %}
+        candiresume
+    {% endblock %}
+
+    {% block content %}
+        <div class="container">
+        {% for candidate in candidate %}
+          {% if candidate.status is not 3 %}
+        
+            <div class="card-container">
+              <img class="round" src="{{ candidate.profile_image.url }}" alt="{{ candidate.first_name }} " height = "200px" width="200px" />
+              <h3>
+                {% if candidate.first_name is not None %}
+
+                {{candidate.first_name}}
+                {% endif %}
+                {% if candidate.middle_name is not None %}
+                 {{candidate.middle_name}} 
+                 {% endif %}
+                 {% if candidate.last_name is not None %}
+                 {{candidate.last_name}}</h3>
+                 {% endif %}
+              <p><h5><a href="{% url 'view_profile' candidate.id %}"> View</a></h5></p> 
+              {% if candidate.resume %}
+              <p><h5><a href="images/{{candidate.resume}}" target="_blank">Resume</a></h5></p>
+              {% endif %}
+              {% if candidate.short_intro is not None %}
+              <p>{{ candidate.short_intro }} </p>
+              {% endif %}
+              <div class="buttons">
+                {% if candidate.status == 1 %}
+                  <a href="{% url 'accept_profile' candidate.id %}"><button class="primary">Accept</button></a>
+                  {% elif candidate.status == 2 %}
+                  <a href=""><button class="primary">Accepted</button></a>
+                  
+                {% endif %}
+                <a href="{% url 'reject_profile' candidate.id %}"><button class="primary ghost">Reject </button></a>
+               
+              </div>
+              <div class="skills">
+                <h6>Skills</h6>
+                <ul>
+                  {% for skill in candidate.skill_set.all %}
+                  <li>{{ skill.name }}</li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    {% endblock %}

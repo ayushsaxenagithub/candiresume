@@ -1,0 +1,33 @@
+{% extends 'main.html' %}
+
+    {% block css %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    {% endblock %}
+
+
+    {% block title %}
+        User Profile
+    {% endblock %}
+
+    {% block content %}
+        {% for user in user %}
+        <img src="{{ user.image_profile.url}}" height="200px" width="200px">
+        <br />
+        <h3> <b>Name</b> : {{ user.name }}</h3>
+        {% if user.user.username %}
+        <h4><b>username</b> : {{ user.user.username }}</h4>
+        {% endif %}
+        {% if user.emial %}
+        <p><b>Email</b> : {{ user.email }}</p>
+        {% endif %}
+        {% if user.detail %}
+        <h4><b>Detail</b>  : {{ user.detail }}</h4>
+        {% endif %}
+        <br/>
+        <hr />
+        <br />
+        {% endfor %}
+        
+        <a href="{% url 'edit-account' %}" style="text-decoration:None; font-size:25px;"> Edits-Accounts</a>
+    {% endblock %}
